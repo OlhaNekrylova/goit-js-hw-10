@@ -11,6 +11,8 @@ const DEBOUNCE_DELAY = 300;
 
 ref.input.addEventListener('input', _.debounce(onInputChange, DEBOUNCE_DELAY));
 
+const countries = [];
+
 function onInputChange(evt) {
     evt.preventDefault();
     if (evt.currentTarget.reset()) {
@@ -19,4 +21,17 @@ function onInputChange(evt) {
 
     fetchCountries(name);
     evt.currentTarget.value.trim();
+
+    if (countries.length > 10) {
+        return Notify.info('Too many matches found. Please enter a more specific name.');
+    } else if (2 <= countries.length <= 10) {
+        return countries.map();
+    } else {
+        return countriesCardMarkup();        
+
+    }
+}
+
+function countriesCardMarkup() {
+
 }

@@ -10,5 +10,6 @@ export const fetchCountries = (name) => {
 
     fetch(url, options)
     .then(response => response.json())
-    .then(console.log());
+    .then(console.log())
+    .catch(Notify.failure('Oops, there is no country with that name'));
 }
