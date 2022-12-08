@@ -1,6 +1,10 @@
-const url = 'https://restcountries.com/v2/name/{name}';
+const BASE_URL = 'https://restcountries.com/v3.1/name/';
+const fields = 'fields=name,capital,population,flags,languages';
 
-export const fetchCountries = (name) => {
-    const options = `${name}`;
-    return fetch(url, options).then(res => res.json());
-};
+export function fetchCountries(name) {
+    return fetch(`${BASE_URL}${name}?${fields}`)
+    .then(response => response.json())
+    .catch(error => Notify.failure('Oops, there is no country with that name'));
+}
+
+

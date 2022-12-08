@@ -1,7 +1,9 @@
-const searchForm = document.querySelector('.js-search-form');
-const articlesContainer = document.querySelector('.js-articles');
+const countryInput = document.querySelector('#search-box');
+const countryList = document.querySelector('.country-list');
+const countryInfo = document.querySelector('.country-info');
 
 export default {
-searchForm,
-articlesContainer,
+    countryInput,
+    countryList,
+    countryInfo,
 };
