@@ -4,7 +4,7 @@ import refs from './refs';
 import articlesOneCountry from './templates/templatesOneCountry.hbs';
 import countryList from './templates/templatesManyCountries.hbs';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-// const Handlebars = require("handlebars"); 
+const Handlebars = require("handlebars"); 
 // const template = Handlebars.compile("Name: {{name}}");
 const debounce = require('lodash.debounce');
 
@@ -12,14 +12,13 @@ const DEBOUNCE_DELAY = 300;
 
 refs.searchForm.addEventListener('input', debounce(countrySearchInputHandler, DEBOUNCE_DELAY));
 
-// const countries = [];
-
 function countrySearchInputHandler(evt) {
     evt.preventDefault();
     clearArticlesContainer();
-    const searchQuery = e.target.value.trim();
+    const searchQuery = evt.target.value.trim();
 
-    fetchCountries.fetchCountries(searchQuery).then(data => {
+    fetchCountries.fetchCountries(searchQuery)
+    .then(data => {
     
     if (data.length > 10) {
         return Notify.info('Too many matches found. Please enter a more specific name.');
@@ -30,12 +29,12 @@ function countrySearchInputHandler(evt) {
     } else if (data.length <= 10) {
         buildListMarkup(data, countryList);
     }
-})
-.catch(Notify.failure('Oops, there is no country with that name'));
-}
+    })
+    .catch(Notify.failure('Oops, there is no country with that name'));
+    }
 
 function buildListMarkup(countries, template) {
-    const markup = countries.map(count => template(count)).join();
+    const markup = countries.map(country => template(country)).join('');
     refs.articlesContainer.insertAdjacentHTML('afterbegin', markup);
 }
 
